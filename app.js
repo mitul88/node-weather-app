@@ -10,7 +10,12 @@ app.get("/", (req, res)=> {
 
     const url = `https://api.openweathermap.org/data/2.5/weather?q=dhaka&appid=${api_key}`;
     https.get(url, (response)=> {
-        console.log(response);
+        console.log(response.statusCode);
+
+        response.on("data", (data)=> {
+            const weatherData = JSON.parse(data);
+            console.log(weatherData);
+        })
     })
 
     res.send("Welcome")

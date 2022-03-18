@@ -14,7 +14,9 @@ app.get("/", (req, res)=> {
 
         response.on("data", (data)=> {
             const weatherData = JSON.parse(data);
-            console.log(weatherData);
+            const temp = JSON.stringify(weatherData.main.temp);
+            const description = JSON.stringify(weatherData.weather[0].description);
+            console.log(description);
         })
     })
 

@@ -8,7 +8,7 @@ app.get("/", (req, res)=> {
 
     const api_key = process.env.api_key;
 
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=dhaka&appid=${api_key}`;
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=dhaka&appid=${api_key}&units=metric`;
     https.get(url, (response)=> {
         console.log(response.statusCode);
 
@@ -16,11 +16,9 @@ app.get("/", (req, res)=> {
             const weatherData = JSON.parse(data);
             const temp = JSON.stringify(weatherData.main.temp);
             const description = JSON.stringify(weatherData.weather[0].description);
-            console.log(description);
+            res.send("The temperture of Dhaka righ now is : " + temp + " degree celcius");
         })
     })
-
-    res.send("Welcome")
 })
 
 

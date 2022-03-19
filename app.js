@@ -14,9 +14,14 @@ app.get("/", (req, res)=> {
 
         response.on("data", (data)=> {
             const weatherData = JSON.parse(data);
-            const temp = JSON.stringify(weatherData.main.temp);
-            const description = JSON.stringify(weatherData.weather[0].description);
-            res.send("The temperture of Dhaka righ now is : " + temp + " degree celcius");
+            const temp = weatherData.main.temp;
+            const description = weatherData.weather[0].description;
+            const icon = weatherData.weather[0].icon;
+            iconUrl = `http://openweathermap.org/img/wn/${icon}@2x.png`
+            res.write("<h1>The temperture of Dhaka righ now is : " + temp + " degree celcius</h1>");
+            res.write("<h4>The weather of Dhaka currently overcast : " + description + "</h4>");
+            res.write(`<img src='${iconUrl}' />`);
+            res.send();
         })
     })
 })
